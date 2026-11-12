@@ -41,7 +41,22 @@
         <span class="cta-note">Coming soon · One-time purchase · Windows</span>
       </div>
 
-      <div class="shot"><img src="img/stripboard.png" alt="Slate stripboard with the scheduling assistant"></div>
+      <!-- Screenshot gallery. To add a slide, copy one <figure> block and change the image name and caption. -->
+      <div class="gallery" aria-roledescription="carousel" aria-label="Slate screenshots">
+        <div class="gallery-track" tabindex="0">
+          <figure class="slide"><img src="img/stripboard.png" alt="Stripboard with shoot days, day off and colour-coded strips"><figcaption>Stripboard: drag strips, add day breaks and days off</figcaption></figure>
+          <figure class="slide"><img src="img/assistant.png" alt="Scheduling assistant chat with a proposed change" loading="lazy"><figcaption>Scheduling assistant: ask in plain English, preview, apply or undo</figcaption></figure>
+          <figure class="slide"><img src="img/script-1.png" alt="Script view with highlighted breakdown elements" loading="lazy"><figcaption>Script view with every element highlighted</figcaption></figure>
+          <figure class="slide"><img src="img/scene-breakdown-1.png" alt="Scene breakdown sheet" loading="lazy"><figcaption>Scene breakdown in the industry-standard colour code</figcaption></figure>
+          <figure class="slide"><img src="img/call-sheet-1.png" alt="Call sheet header with key contacts" loading="lazy"><figcaption>Call sheets with key contacts, hospital and sun times</figcaption></figure>
+          <figure class="slide"><img src="img/call-sheet-2.png" alt="Call sheet cast and crew calls" loading="lazy"><figcaption>Cast and crew calls, printable per day</figcaption></figure>
+          <figure class="slide"><img src="img/dood.png" alt="Day Out of Days report" loading="lazy"><figcaption>Day Out of Days with SW, W, WF and H codes</figcaption></figure>
+          <figure class="slide"><img src="img/overview.png" alt="Project overview" loading="lazy"><figcaption>Project overview: cast, locations and totals</figcaption></figure>
+        </div>
+        <button class="gallery-btn prev" type="button" aria-label="Previous screenshot">&#8249;</button>
+        <button class="gallery-btn next" type="button" aria-label="Next screenshot">&#8250;</button>
+        <div class="gallery-dots" role="tablist" aria-label="Choose screenshot"></div>
+      </div>
     </div>
   </div>
 
@@ -216,6 +231,66 @@
 
 <script>
   document.getElementById('year').textContent = new Date().getFullYear();
+
+  // Screenshot gallery: arrows, dots, keyboard and swipe (swipe uses native scroll snapping).
+  (function () {
+    var gallery = document.querySelector('.gallery');
+    if (!gallery) return;
+    var track = gallery.querySelector('.gallery-track');
+    var slides = Array.prototype.slice.call(track.querySelectorAll('.slide'));
+    var dotsBox = gallery.querySelector('.gallery-dots');
+    var current = 0;
+
+    slides.forEach(function (slide, i) {
+      var dot = document.createElement('button');
+      dot.type = 'button';
+      dot.setAttribute('role', 'tab');
+      dot.setAttribute('aria-label', 'Screenshot ' + (i + 1) + ' of ' + slides.length);
+      dot.addEventListener('click', function () { go(i); });
+      dotsBox.appendChild(dot);
+    });
+    var dots = Array.prototype.slice.call(dotsBox.children);
+
+    function go(i) {
+      i = (i + slides.length) % slides.length;
+      track.scrollTo({ left: slides[i].offsetLeft - track.offsetLeft, behavior: 'smooth' });
+    }
+    function mark(i) {
+      current = i;
+      dots.forEach(function (d, j) { d.setAttribute('aria-selected', j === i ? 'true' : 'false'); });
+    }
+
+    gallery.querySelector('.prev').addEventListener('click', function () { go(current - 1); });
+    gallery.querySelector('.next').addEventListener('click', function () { go(current + 1); });
+    track.addEventListener('keydown', function (e) {
+      if (e.key === 'ArrowLeft') { e.preventDefault(); go(current - 1); }
+      if (e.key === 'ArrowRight') { e.preventDefault(); go(current + 1); }
+    });
+
+    var t;
+    track.addEventListener('scroll', function () {
+      clearTimeout(t);
+      t = setTimeout(function () {
+        var i = Math.round(track.scrollLeft / track.clientWidth);
+        mark(Math.max(0, Math.min(slides.length - 1, i)));
+      }, 60);
+    });
+
+    // Hide slides whose image is missing, so a not-yet-uploaded screenshot never shows as broken.
+    slides.forEach(function (slide) {
+      var img = slide.querySelector('img');
+      img.addEventListener('error', function () {
+        var i = slides.indexOf(slide);
+        slide.remove(); slides.splice(i, 1);
+        if (dots[i]) { dots[i].remove(); dots.splice(i, 1); }
+        if (slides.length <= 1) gallery.classList.add('single');
+        dots.forEach(function (d, j) { d.setAttribute('aria-label', 'Screenshot ' + (j + 1) + ' of ' + slides.length); });
+        mark(Math.min(current, slides.length - 1));
+      });
+    });
+
+    mark(0);
+  })();
 </script>
 </body>
 </html>
