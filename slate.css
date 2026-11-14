@@ -1,3 +1,4 @@
+@font-face { font-family: "Saira Stencil One"; font-weight: 400; font-display: swap; src: url("fonts/sairastencil-latin.woff2") format("woff2"); }
 @font-face { font-family: "Courier Prime"; font-weight: 400; font-display: swap; src: url("fonts/courierprime-400.woff2") format("woff2"); }
 @font-face { font-family: "Courier Prime"; font-weight: 700; font-display: swap; src: url("fonts/courierprime-700.woff2") format("woff2"); }
 @font-face { font-family: "Archivo"; font-weight: 400 700; font-display: swap; src: url("fonts/archivo-latin.woff2") format("woff2"); }
@@ -52,10 +53,10 @@ h2 { font-size: clamp(2.25rem, 5vw, 4rem); max-width: 18ch; }
 .lede { font-size: 1.1875rem; max-width: 60ch; margin: 1.25rem 0 0; color: var(--ink-2); }
 
 /* ---------- top line + hero ---------- */
-.topline { display: flex; align-items: baseline; gap: 2rem; padding: 1.5rem 0 1.1rem; max-width: 70rem; margin: 0 auto; border-bottom: 1px solid rgba(20, 22, 27, 0.35); }
+.topline { display: flex; align-items: center; gap: 2rem; padding: 1.5rem 0 1.1rem; max-width: 70rem; margin: 0 auto; border-bottom: 1px solid rgba(20, 22, 27, 0.35); }
 .draft { margin: 0; font-family: var(--script); font-size: 0.8125rem; letter-spacing: 0.04em; }
 .cont { margin: 1.25rem 0 0; text-align: right; font-family: var(--script); font-size: 0.8125rem; letter-spacing: 0.04em; }
-.mark { font-family: var(--script); font-weight: 700; font-size: 1.375rem; letter-spacing: 0.08em; text-decoration: none; }
+
 .links { display: flex; gap: 1.75rem; margin-left: auto; font-size: 0.9375rem; }
 .links + .draft { margin-left: 0; }
 .links a { text-decoration: none; padding: 0.25rem 0; border-bottom: 1px solid transparent; }
@@ -249,3 +250,13 @@ button { font: inherit; cursor: pointer; }
 .page > .sheet + .sheet { margin-top: clamp(5rem, 9vw, 8rem); padding-top: clamp(3rem, 5vw, 4.5rem); border-top: 2px solid var(--ink); }
 .trap { position: absolute; left: -9999px; width: 1px; height: 1px; opacity: 0; }
 .notify button[type="submit"]:disabled { opacity: 0.6; cursor: progress; }
+
+/* ---------- Guerrilla Frame brand ---------- */
+.mark { display: inline-flex; align-items: center; gap: 0.75rem; text-decoration: none; font-size: inherit; letter-spacing: 0; }
+.mark img { width: 2.5rem; height: 2.5rem; flex: none; }
+.mark-text { display: grid; line-height: 1; }
+.mark-text b { font-family: "Saira Stencil One", "Courier New", monospace; font-weight: 400; font-size: 1.5rem; letter-spacing: 0.04em; }
+.mark-text small { font-family: var(--script); font-size: 0.6875rem; letter-spacing: 0.06em; text-transform: uppercase; margin-top: 0.3rem; color: var(--ink-2); }
+.foot-brand { display: grid; gap: 0.9rem; }
+.foot-brand img { width: auto; height: 5rem; max-width: 100%; }
+.foot-brand p { margin: 0; }
