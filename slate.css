@@ -14,6 +14,7 @@
 
   /* breakdown category colours (match the app's tagging) */
   --c-cast: #c8423a;
+  --coral: #ff5c35;
   --c-bg: #2f8f4e;
   --c-props: #7a4bc2;
   --c-set: #8a7a4a;
@@ -27,7 +28,7 @@
 *, *::before, *::after { box-sizing: border-box; }
 html { scroll-behavior: smooth; scroll-padding-top: 1rem; scrollbar-color: var(--ink) var(--white); }
 body { margin: 0; font-family: var(--sans); font-size: 1.0625rem; line-height: 1.6; color: var(--ink); background: var(--white); caret-color: var(--ink); -webkit-font-smoothing: antialiased; }
-::selection { background: var(--ink); color: var(--white); }
+::selection { background: var(--coral); color: var(--ink); }
 img { max-width: 100%; height: auto; display: block; }
 a { color: inherit; text-underline-offset: 0.2em; text-decoration-thickness: 1px; }
 a:hover { text-decoration-thickness: 2px; }
@@ -76,8 +77,8 @@ input[type="email"] { flex: 1 1 15rem; min-width: 0; font: inherit; font-size: 1
 input[type="email"]::placeholder { color: #5a606c; }
 input[type="email"]:invalid:not(:placeholder-shown) { border-style: dashed; }
 button { font: inherit; cursor: pointer; }
-.notify button[type="submit"] { font-family: var(--script); font-weight: 700; font-size: 1rem; padding: 0.85rem 1.4rem; color: var(--white); background: var(--ink); border: 2px solid var(--ink); border-radius: 0; transition: background 0.2s var(--ease), color 0.2s var(--ease); }
-.notify button[type="submit"]:hover { background: var(--c-cast); border-color: var(--c-cast); }
+.notify button[type="submit"] { font-family: var(--script); font-weight: 700; font-size: 1rem; padding: 0.85rem 1.4rem; color: var(--ink); background: var(--coral); border: 2px solid var(--ink); border-radius: 0; transition: background 0.2s var(--ease), color 0.2s var(--ease); }
+.notify button[type="submit"]:hover { background: var(--ink); color: var(--white); }
 .msg { margin: 0.6rem 0 0; min-height: 1.5em; font-size: 0.9375rem; }
 .fine { margin: 1.25rem 0 0; font-size: 0.9375rem; color: var(--ink-2); }
 
