@@ -1,0 +1,11 @@
+{
+  "schema": 1,
+  "latest": {
+    "version": "0.3.0",
+    "date": "2026-11-23",
+    "notes": "Licensing now runs through Polar.",
+    "downloadUrl": "https://aliengunship.github.io/guerrillaframe/"
+  },
+  "endOfLife": [],
+  "notice": null
+}
